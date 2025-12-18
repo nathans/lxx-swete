@@ -31,7 +31,7 @@ import xml.sax
 
 FILTER_CHARS = ["¶", "[", "]", "§"]
 OUTLINE = "{0}.{1}.{2} {3}\n"
-DEST = "data/{0:02d}.{1}.txt"
+DEST = "../data/{0:02d}.{1}.txt"
 TITLES = {
     "01": "Genesis",
     "02": "Exodus",

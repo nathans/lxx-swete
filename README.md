@@ -21,4 +21,10 @@ the MIT License (see "COPYING-Code").
 
 ## Building
 
-**TODO** Describe the process for building here
+See utils/README.md for instructions.
+
+## Changelog
+
+### 2025-12
+- Simplified file names
+- Rebased to January 23, 2025 update to source text (commit eb81494731fd632f582c4b94634127bdbd596b43)
