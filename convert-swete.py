@@ -3,7 +3,7 @@
 #
 # Convert OGL Swete TEI files to one token per line, with verses.
 #
-# Copyright 2015, 2017, 2019 Nathan D. Smith <nathan@smithfam.info>
+# Copyright 2025 Nathan D. Smith <nathan@smithfam.info>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -32,16 +32,70 @@ import xml.sax
 FILTER_CHARS = ["¶", "[", "]", "§"]
 OUTLINE = "{0}.{1}.{2} {3}\n"
 DEST = "data/{0:02d}.{1}.txt"
+TITLES = {
+    "01": "Genesis",
+    "02": "Exodus",
+    "03": "Leviticus",
+    "04": "Numeri",
+    "05": "Deuteronomium",
+    "06": "Josue",
+    "08": "Judices",
+    "10": "Ruth",
+    "11": "Regnorum_I",
+    "12": "Regnorum_II",
+    "13": "Regnorum_III",
+    "14": "Regnorum_IV",
+    "15": "Paralipomenon_I",
+    "16": "Paralipomenon_II",
+    "17": "Esdras_A",
+    "18": "Esdras_B",
+    "19": "Esther",
+    "20": "Judith",
+    "21": "Tobias",
+    "23": "Machabaeorum_i",
+    "24": "Machabaeorum_ii",
+    "25": "Machabaeorum_iii",
+    "26": "Machabaeorum_iv",
+    "27": "Psalmi",
+    "28": "Odae",
+    "29": "Proverbia",
+    "31": "Canticum",
+    "32": "Job",
+    "33": "Sapientia_Salomonis",
+    "34": "Ecclesiasticus",
+    "35": "Psalmi_Salomonis",
+    "36": "Osee",
+    "37": "Amos",
+    "38": "Michaeas",
+    "39": "Joel",
+    "40": "Abdias",
+    "41": "Jonas",
+    "42": "Nahum",
+    "43": "Habacuc",
+    "44": "Sophonias",
+    "45": "Aggaeus",
+    "46": "Zacharias",
+    "47": "Malachias",
+    "48": "Isaias",
+    "49": "Jeremias",
+    "50": "Baruch",
+    "51": "Threni_seu_Lamentationes",
+    "52": "Epistula_Jeremiae",
+    "53": "Ezechiel",
+    "54": "Susanna_translatio_Graeca",
+    "55": "Susanna_Theodotionis_versio",
+    "56": "Daniel_translatio_Graeca",
+    "57": "Daniel_Theodotionis_versio",
+    "58": "Bel_et_Draco_translatio_Graeca",
+    "59": "Bel_et_Draco_Theodotionis_versio"
+}
 
-def get_filename(number, title):
-    "Return a nice filename from the given title"
+def get_filename(number):
+    "Return a nice filename from the given book ID"
 
-    title = title.replace(" ", "_")
-    parens = ["(", ")"]
-    for paren in parens:
-        title = title.replace(paren, "")
-    dest = DEST.format(number, title.strip())
-    return dest
+    title = TITLES["{0:02d}".format(number)]
+    return DEST.format(number, title.strip())
+
 
 class SweteLXX(xml.sax.handler.ContentHandler):
     "Parser for Swete LXX XML"
@@ -192,7 +246,7 @@ class SweteLXX(xml.sax.handler.ContentHandler):
 
         # Write output to file
         if self.outfile:
-            dest = get_filename(self.current_book, self.book_title)
+            dest = get_filename(self.current_book)
             f = open(dest, 'w')
             f.writelines(self.out_lines)
             f.close()

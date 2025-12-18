@@ -2,7 +2,7 @@
 #
 # Helper script to convert OGL Swete TEI
 #
-# Copyright 2019, Nathan D. Smith <nathan@smithfam.info>
+# Copyright 2025 Nathan D. Smith <nathan@smithfam.info>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-PYTHON3=./bin/python3
-
-source ./bin/activate
+# Assuming an appropriate virtual environment is already activated
 
 for file in First1KGreek/data/tlg0527/*/tlg0527*grc*xml; do
-    $PYTHON3 convert-swete.py --outfile --file "$file" convert 
+    python3 convert-swete.py --outfile --file "$file" convert
 done
